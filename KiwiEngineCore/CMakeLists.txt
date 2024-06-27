@@ -13,15 +13,22 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(raylib)
 
+# Fetch raygui
+FetchContent_Declare(
+	raygui
+	GIT_REPOSITORY https://github.com/raysan5/raygui.git
+	GIT_TAG 4.0
+)
+
+FetchContent_MakeAvailable(raygui)
+
 #########################################################
 
 set(ENGINE_PUBLIC_INCLUDES
-
 	includes/KiwiEngineCore/Application.h
 )
 
 set(ENGINE_PUBLIC_SOURCES
-
 	src/KiwiEngineCore/Application.cpp
 
 )
@@ -37,7 +44,11 @@ add_library(${ENGINE_PROJECT_NAME} STATIC ${ENGINE_ALL_SOURCES})
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${ENGINE_ALL_SOURCE})
 
-target_include_directories(${ENGINE_PROJECT_NAME} PUBLIC includes ${raylib_SOURCE_DIR}/src)
+target_include_directories(${ENGINE_PROJECT_NAME} PUBLIC
+	includes
+	${raylib_SOURCE_DIR}/src
+	${raygui_SOURCE_DIR}/src
+)
 
 target_compile_features(${ENGINE_PROJECT_NAME} PUBLIC cxx_std_17)
 

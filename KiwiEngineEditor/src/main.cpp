@@ -1,12 +1,18 @@
 #include <raylib.h>
 
+#define RAYGUI_IMPLEMENTATION
+#include <raygui.h>
+
+// window
+const int WIDTH = 800;
+const int HEIGHT = 600;
+
 int main()
 {
-	// Window
-	int width = 800;
-	int height = 600;
+	InitWindow(WIDTH, HEIGHT, "KiwiEngine");
+	SetTargetFPS(60);
 
-	InitWindow(width, height, "Window");
+	bool showMessageBox = false;
 
 	// Cirlce
 	int circle_x = 400;
@@ -19,12 +25,23 @@ int main()
 	int rectangle_width = 100;
 	int rectangle_height = 100;
 
-	SetTargetFPS(60);
-
 	while (!WindowShouldClose())
 	{
+
+		// Draw
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
+
+		ClearBackground(GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR)));
+
+		if (GuiButton(Rectangle { 24, 24, 120, 30 }, "#191#Show Message")) showMessageBox = true;
+
+		if (showMessageBox)
+		{
+			int result = GuiMessageBox(Rectangle {85, 70, 250, 100},
+				"#191#MessageBox", "Hi! This is a message!", "Nice;Cool");
+
+			if (result >= 0) showMessageBox = false;
+		}
 
 		// Game login begins
 
@@ -51,6 +68,7 @@ int main()
 		// Game login ends
 		EndDrawing();
 	}
-
+	
+	CloseWindow();
 	return 0;
 }
