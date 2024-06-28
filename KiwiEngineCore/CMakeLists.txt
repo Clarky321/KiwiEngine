@@ -26,10 +26,14 @@ FetchContent_MakeAvailable(raygui)
 
 set(ENGINE_PUBLIC_INCLUDES
 	includes/KiwiEngineCore/Application.h
+	includes/KiwiEngineCore/Player.h
+	includes/KiwiEngineCore/Input.h
 )
 
 set(ENGINE_PUBLIC_SOURCES
 	src/KiwiEngineCore/Application.cpp
+	src/KiwiEngineCore/Player.cpp
+	src/KiwiEngineCore/Input.cpp
 
 )
 
